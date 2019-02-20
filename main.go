@@ -4,20 +4,21 @@ import (
 	"log"
 	"os"
 
-	"github.com/douglaszuqueto/telegram/telegram"
+	telegramService "github.com/douglaszuqueto/telegram/telegram"
 )
 
 func main() {
-	config := telegram.Config{
+	config := telegramService.Config{
 		Token:  os.Getenv("TELEGRAM_TOKEN"),
 		ChatID: os.Getenv("TELEGRAM_CHATID"),
 	}
 
-	bot := telegram.New(&config)
+	telegram := telegramService.New(&config)
 
-	_, err := bot.SendMessage("ok")
+	_, err := telegram.SendMessage("ok")
 
 	if err != nil {
 		log.Panic(err.Error())
 	}
+
 }

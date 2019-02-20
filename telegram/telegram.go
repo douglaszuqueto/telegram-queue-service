@@ -16,7 +16,7 @@ type Config struct {
 
 // Telegram Telegram
 type Telegram struct {
-	bot    *tgbotapi.BotAPI
+	Bot    *tgbotapi.BotAPI
 	chatID string
 }
 
@@ -32,7 +32,7 @@ func New(config *Config) *Telegram {
 	bot.Debug = config.Debug
 
 	return &Telegram{
-		bot:    bot,
+		Bot:    bot,
 		chatID: config.ChatID,
 	}
 }
@@ -56,12 +56,12 @@ func (s *Telegram) SendMessage(message string) (tgbotapi.Message, error) {
 		DisableWebPagePreview: false,
 	}
 
-	return s.bot.Send(msg)
+	return s.Bot.Send(msg)
 }
 
 // Send Send
 func (s *Telegram) Send(message tgbotapi.MessageConfig) (tgbotapi.Message, error) {
-	return s.bot.Send(message)
+	return s.Bot.Send(message)
 }
 
 // Subscribe subscribe
@@ -69,5 +69,5 @@ func (s *Telegram) Subscribe() (tgbotapi.UpdatesChannel, error) {
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
 
-	return s.bot.GetUpdatesChan(u)
+	return s.Bot.GetUpdatesChan(u)
 }
