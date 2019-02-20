@@ -1,7 +1,6 @@
 package telegram
 
 import (
-	"log"
 	"strconv"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
@@ -21,20 +20,21 @@ type Telegram struct {
 }
 
 // New new
-func New(config *Config) *Telegram {
+func New(config *Config) (*Telegram, error) {
 
 	bot, err := tgbotapi.NewBotAPI(config.Token)
 
 	if err != nil {
-		log.Panic(err.Error())
+		return nil, err
 	}
 
 	bot.Debug = config.Debug
 
-	return &Telegram{
+	telegram := &Telegram{
 		Bot:    bot,
 		chatID: config.ChatID,
 	}
+	return telegram, nil
 }
 
 func (s *Telegram) chatIDToInt64() int64 {
