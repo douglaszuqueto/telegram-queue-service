@@ -17,8 +17,9 @@ type Config struct {
 
 // Client client
 type Client struct {
-	conn *amqp.Connection
-	ch   *amqp.Channel
+	conn      *amqp.Connection
+	ch        *amqp.Channel
+	queueName string
 }
 
 func makeURL(config *Config) string {
@@ -40,8 +41,9 @@ func New(config *Config) (*Client, error) {
 	}
 
 	client := &Client{
-		conn: conn,
-		ch:   ch,
+		conn:      conn,
+		ch:        ch,
+		queueName: "telegram",
 	}
 
 	return client, nil
@@ -50,12 +52,12 @@ func New(config *Config) (*Client, error) {
 // SendMessage SendMessage
 func (s *Client) SendMessage(message string) error {
 	q, err := s.ch.QueueDeclare(
-		"telegram", // name
-		true,       // durable
-		false,      // delete when unused
-		false,      // exclusive
-		false,      // no-wait
-		nil,        // arguments
+		s.queueName, // name
+		true,        // durable
+		false,       // delete when unused
+		false,       // exclusive
+		false,       // no-wait
+		nil,         // arguments
 	)
 
 	if err != nil {
@@ -77,13 +79,13 @@ func (s *Client) SendMessage(message string) error {
 // Consume Consume
 func (s *Client) Consume() (<-chan amqp.Delivery, error) {
 	msgs, err := s.ch.Consume(
-		"telegram", // queue
-		"",         // consumer
-		false,      // auto-ack
-		false,      // exclusive
-		false,      // no-local
-		false,      // no-wait
-		nil,        // args
+		s.queueName, // queue
+		"",          // consumer
+		false,       // auto-ack
+		false,       // exclusive
+		false,       // no-local
+		false,       // no-wait
+		nil,         // args
 	)
 
 	if err != nil {
