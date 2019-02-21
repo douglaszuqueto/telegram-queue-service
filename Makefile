@@ -13,4 +13,11 @@ build:
 dev:
 	go run main.go
 
+docker-build:
+	docker build -t telegram-service .
+
+docker-run: docker-build
+
+	@docker run -it --rm -e TELEGRAM_TOKEN="${TELEGRAM_TOKEN}" -e TELEGRAM_CHATID="${TELEGRAM_CHATID}" -e RABBITMQ_USERNAME="${RABBITMQ_USERNAME}" -e RABBITMQ_PASSWORD="${RABBITMQ_PASSWORD}" -e RABBITMQ_IP="${RABBITMQ_IP}" -e RABBITMQ_PORT="${RABBITMQ_PORT}" telegram-service
+
 .PHONY: dev
