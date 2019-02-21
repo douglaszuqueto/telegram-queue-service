@@ -1,5 +1,5 @@
-github.com/douglaszuqueto/telegram v0.0.0-20190220194232-4f0e521176cb h1:jQaTvt6LOzfKbxw/y3J0QWCggFY3Ko2SpQrs/dyziHE=
-github.com/douglaszuqueto/telegram v0.0.0-20190220194232-4f0e521176cb/go.mod h1:PBeFhJDwB6Yf3sp3ymelP4pM9f8r9zdHV4xbEz9Bj2k=
+github.com/douglaszuqueto/telegram v0.0.0-20190221000900-73a7a74727dd h1:uhgpMIjzIzPTfanyQgTkeS7jye/GEBlYklv0aohna7U=
+github.com/douglaszuqueto/telegram v0.0.0-20190221000900-73a7a74727dd/go.mod h1:PBeFhJDwB6Yf3sp3ymelP4pM9f8r9zdHV4xbEz9Bj2k=
 github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible/go.mod h1:qf9acutJ8cwBUhm1bqgz6Bei9/C/c93FPDljKWwsOgM=
 github.com/streadway/amqp v0.0.0-20190214183023-884228600bc9 h1:wR6aLKdbJ5E8m+NZWkVeT49ExjlqUe0B41zfM5/m44I=
 github.com/streadway/amqp v0.0.0-20190214183023-884228600bc9/go.mod h1:1WNBiOZtZQLpVAyu0iTduoJL9hEsMloAK5XWrtW0xdY=

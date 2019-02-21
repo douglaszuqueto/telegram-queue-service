@@ -22,8 +22,7 @@ func main() {
 		log.Panic(err.Error())
 	}
 
-	defer queue.CloseChannel()
-	defer queue.Disconnect()
+	defer queue.Stop()
 
 	var counter int
 
