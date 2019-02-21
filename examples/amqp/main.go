@@ -27,7 +27,7 @@ func main() {
 	var counter int
 
 	for {
-		msg := fmt.Sprintf("Message: %v", counter)
+		msg := fmt.Sprintf("* Message: %v", counter)
 
 		err = queue.SendMessage(msg)
 		if err != nil {
