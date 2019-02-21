@@ -3,12 +3,27 @@ package main
 import (
 	"log"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	queueService "github.com/douglaszuqueto/telegram/queue"
 	telegramService "github.com/douglaszuqueto/telegram/telegram"
 )
 
 func main() {
+	done := make(chan bool)
+	signalCh := make(chan os.Signal, 1)
+
+	signal.Notify(signalCh, os.Interrupt)
+	signal.Notify(signalCh, syscall.SIGTERM)
+
+	go func() {
+		<-signalCh
+		log.Println("Stopping services")
+		done <- true
+	}()
+
 	configQueue := queueService.Config{
 		IP:       os.Getenv("RABBITMQ_IP"),
 		Port:     os.Getenv("RABBITMQ_PORT"),
@@ -31,23 +46,31 @@ func main() {
 		log.Panic(err.Error())
 	}
 
-	defer queue.CloseChannel()
-	defer queue.Disconnect()
+	go func() {
+		messages, err := queue.Consume()
+		if err != nil {
+			log.Panic(err.Error())
+		}
 
-	err = queue.SendMessage("hellllo")
-	if err != nil {
-		log.Panic(err.Error())
-	}
+		for {
+			select {
+			case message := <-messages:
+				msg := string(message.Body)
 
-	messages, err := queue.Consume()
-	if err != nil {
-		log.Panic(err.Error())
-	}
+				log.Println(msg)
 
-	for d := range messages {
-		log.Printf("Received a message: %s", d.Body)
-		telegram.SendMessage(string(d.Body))
-		d.Ack(true)
-	}
+				_, err := telegram.SendMessage(msg)
+				if err != nil {
+					log.Println(err.Error())
+				}
+				message.Ack(true)
+			case <-time.After(10 * time.Second):
+				log.Println("No messages")
+			}
+		}
+	}()
 
+	<-done
+	queue.Stop()
+	log.Println("Exited...")
 }

@@ -2,6 +2,7 @@ package queue
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/streadway/amqp"
 )
@@ -67,8 +68,7 @@ func (s *Client) SendMessage(message string) error {
 		false,  // mandatory
 		false,  // immediate
 		amqp.Publishing{
-			ContentType: "text/plain",
-			Body:        []byte(message),
+			Body: []byte(message),
 		})
 
 	return nil
@@ -93,12 +93,20 @@ func (s *Client) Consume() (<-chan amqp.Delivery, error) {
 	return msgs, nil
 }
 
-// Disconnect Disconnect
-func (s *Client) Disconnect() {
-	s.conn.Close()
-}
+// Stop Stop
+func (s *Client) Stop() {
+	log.Println("Closing rabbit channel")
+	err := s.ch.Close()
 
-// CloseChannel CloseChannel
-func (s *Client) CloseChannel() {
-	s.ch.Close()
+	if err != nil {
+		return
+	}
+
+	log.Println("Closing rabbit connection")
+
+	err = s.conn.Close()
+
+	if err != nil {
+		return
+	}
 }
