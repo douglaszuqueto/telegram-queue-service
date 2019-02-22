@@ -20,4 +20,7 @@ docker-run: docker-build
 
 	@docker run -it --rm -e TELEGRAM_TOKEN="${TELEGRAM_TOKEN}" -e TELEGRAM_CHATID="${TELEGRAM_CHATID}" -e RABBITMQ_USERNAME="${RABBITMQ_USERNAME}" -e RABBITMQ_PASSWORD="${RABBITMQ_PASSWORD}" -e RABBITMQ_IP="${RABBITMQ_IP}" -e RABBITMQ_PORT="${RABBITMQ_PORT}" telegram-service
 
+deploy-rpi: build
+	scp ./bin/telegram-service-arm ${RASPBERRY_USER}@${RASPBERRY_IP}:~/
+
 .PHONY: dev

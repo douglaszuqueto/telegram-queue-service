@@ -1,0 +1,10 @@
+version: '3'
+services:
+  service:
+    image: "telegram-service"
+    env_file:
+      - .env
+  example-amqp:
+    image: "telegram-amqp"
+    env_file:
+      - ./examples/amqp/.env
