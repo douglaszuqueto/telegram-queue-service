@@ -13,7 +13,7 @@ build:
 dev:
 	go run main.go
 
-docker-build:
+docker-build: build
 	docker build -t telegram-service .
 
 docker-run: docker-build
