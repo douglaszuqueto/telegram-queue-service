@@ -7,8 +7,8 @@ import (
 	"syscall"
 	"time"
 
-	queueService "github.com/douglaszuqueto/telegram/queue"
-	telegramService "github.com/douglaszuqueto/telegram/telegram"
+	queueService "github.com/douglaszuqueto/telegram-queue-service/queue"
+	telegramService "github.com/douglaszuqueto/telegram-queue-service/telegram"
 )
 
 func main() {
