@@ -1,4 +1,4 @@
-module github.com/douglaszuqueto/telegram
+module github.com/douglaszuqueto/telegram-queue-service
 
 require (
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible
