@@ -13,7 +13,7 @@ build:
 dev:
 	go run main.go
 
-docker-build: build
+docker-build:
 	docker build -t telegram-amqp .
 
 docker-run: docker-build
