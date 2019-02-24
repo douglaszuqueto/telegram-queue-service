@@ -80,7 +80,8 @@ Por questão de facilidade, eu recomendo que você faça o download desse reposi
 
 ### Requisítos minimos
 
-Ter uma instáncia do RabbitMQ rodando. Seja no seu computador, Docker, na Raspberry ou até mesmo no [Cloud AMQP](https://www.cloudamqp.com/) caso não queira instalar o serviço.
+* Ter uma instáncia do RabbitMQ rodando. Seja no seu computador, Docker, na Raspberry ou até mesmo no [Cloud AMQP](https://www.cloudamqp.com/) caso não queira instalar o serviço
+* Possuir um *bot* no telegram;
 
 ### Rodando o serviço principal
 Como citado anteriormente, você precisa das variáveis de ambiente declaradas. Você pode criar um arquivo exportando as variáveis ou rodar cada serviço com as mesmas de forma inline.
