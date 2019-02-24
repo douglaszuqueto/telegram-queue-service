@@ -143,4 +143,14 @@ Como você pode observar, temos 3 etapas que ocorrem quando uma simples mensagem
 
 * 1º - Producer => Exchange: Aqui a exchange é a porta de entrada, toda mensagem vai para essa camada e depois é roteada para a(s) fila(s)
 * 2º - Exchange => Queue: Nesta etapa, de fato a mensagem chega na fila, pronta para ser consumida por seu(s) consumer(s)
-* 3º - Qeue => Consumer: Na finaleira temos o consumer, aqui a mensagem chega e é aplicado a regra de negócio que for. No contexto atual, a mensagem que chega é enviada para o *Telegram* através de sua API
+* 3º - Queue => Consumer: Na finaleira temos o consumer, aqui a mensagem chega e é aplicada a regra de negócio que for. No contexto atual - a mensagem que chega é enviada para o *Telegram* através de sua API
+
+## Resultado final
+
+### Serviço principal & Exemplo
+
+![img](https://raw.githubusercontent.com/douglaszuqueto/telegram-queue-service/master/.github/screenshot_2.png)
+
+### Mensagem recebida no telegram
+
+![img](https://raw.githubusercontent.com/douglaszuqueto/telegram-queue-service/master/.github/screenshot.png)

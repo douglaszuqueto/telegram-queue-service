@@ -26,14 +26,17 @@ func main() {
 
 	var counter int
 
-	msg := fmt.Sprintf("*Message*: %v", counter)
+	for {
+		msg := fmt.Sprintf("*Message*: %v", counter)
 
-	err = queue.SendMessage(msg)
-	if err != nil {
-		log.Panic(err.Error())
+		err = queue.SendMessage(msg)
+		if err != nil {
+			log.Panic(err.Error())
+		}
+
+		log.Printf("Sending message: %v", msg)
+		counter++
+
+		time.Sleep(5 * time.Second)
 	}
-
-	log.Printf("Sending message: %v", msg)
-	counter++
-	time.Sleep(5 * time.Second)
 }
