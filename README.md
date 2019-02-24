@@ -149,7 +149,7 @@ Como você pode observar, temos 3 etapas que ocorrem quando uma simples mensagem
 
 ### Serviço principal & Exemplo
 
-![img](https://raw.githubusercontent.com/douglaszuqueto/telegram-queue-service/master/.github/screenshot_2.png)
+![img](https://raw.githubusercontent.com/douglaszuqueto/telegram-queue-service/master/.github/screenshot_3.png)
 
 ### Mensagem recebida no telegram
 
