@@ -82,7 +82,7 @@ Por questão de facilidade, eu recomendo que você faça o download desse reposi
 
 Ter uma instáncia do RabbitMQ rodando. Seja no seu computador, Docker, na Raspberry ou até mesmo no [Cloud AMQP](https://www.cloudamqp.com/) caso não queira instalar o serviço.
 
-### Rodando serviço principal
+### Rodando o serviço principal
 Como citado anteriormente, você precisa das variáveis de ambiente declaradas. Você pode criar um arquivo exportando as variáveis ou rodar cada serviço com as mesmas de forma inline.
 
 #### Ex. 1:
@@ -140,17 +140,21 @@ RABBITMQ_IP=0.0.0.0 RABBITMQ_PORT=5672 RABBITMQ_USERNAME=guest RABBITMQ_PASSWORD
 
 ## Diagrama de funcionamento
 
-No diagrama em anexo, é um pouco mais completo do que realmente esse projeto faz. Mas serve de base para saber das possibilidades. 
-
-Por exemplo: Além dos alertas enviados ao telegram, poderiamos ter mais 2 serviços. Um cadastrando as mensagens no banco de dados e outro salvando em um arquivo de log(texto).
-
-![img](https://raw.githubusercontent.com/douglaszuqueto/telegram-queue-service/master/.github/diagram.png)
+![img](https://raw.githubusercontent.com/douglaszuqueto/telegram-queue-service/master/.github/diagram-example.png)
 
 Como você pode observar, temos 3 etapas que ocorrem quando uma simples mensagem é enviada.
 
 * 1º - Producer => Exchange: Aqui a exchange é a porta de entrada, toda mensagem vai para essa camada e depois é roteada para a(s) fila(s)
 * 2º - Exchange => Queue: Nesta etapa, de fato a mensagem chega na fila, pronta para ser consumida por seu(s) consumer(s)
 * 3º - Queue => Consumer: Na finaleira temos o consumer, aqui a mensagem chega e é aplicada a regra de negócio que for. No contexto atual - a mensagem que chega é enviada para o *Telegram* através de sua API
+
+### Exemplo de diagrama um pouco mais complexo 
+
+No diagrama abaixo, é um pouco mais completo do que realmente esse projeto faz. Mas serve de base para saber das possibilidades. 
+
+Por exemplo: Além dos alertas enviados ao telegram, poderiamos ter mais 2 serviços. Um cadastrando as mensagens no banco de dados e outro salvando em um arquivo de log(texto).
+
+![img](https://raw.githubusercontent.com/douglaszuqueto/telegram-queue-service/master/.github/diagram.png)
 
 ## Resultado final
 
